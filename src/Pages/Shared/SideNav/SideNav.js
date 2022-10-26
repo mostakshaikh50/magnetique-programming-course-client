@@ -13,7 +13,7 @@ const SideNav = () => {
     })
     return (
         <div>
-            <h4>Our All Courses: {courses.length}</h4>
+            <h4 style={{ color:'yellowgreen', fontWeight:"700", fontSize:"40px" }}>Find Your Course</h4>
             {
                 courses.map(course => <p className='mt-5'
                   key={course.id}

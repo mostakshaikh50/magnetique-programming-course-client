@@ -8,22 +8,12 @@ import Row from 'react-bootstrap/Row';
 
 const Home = () => {
     const allCourse = useLoaderData();
-    //const { id, name, duration, description } = course;
-    console.log(allCourse);
     return (
-        <div>
-            <h2>This is Home Component: {allCourse.length}</h2>
-            {/* {
-                allCourse.map(course => <CourseSummary
-                 key ={course.id}
-                 course={course}
-                ></CourseSummary>)
-            } */}
-
+        <div>            
             <Row xs={1} md={2} className="g-4">
                 {allCourse.length && allCourse.map((item, idx) => (
                     <Col key={idx}>
-                        <Card>
+                        <Card style={{ height: "300px" }}>
                             <Card.Body className='mt-3'>
                                 <Card.Title><h3 className='h2 text-center mb-3'>{item.name}</h3></Card.Title>
                                 <Card.Text>
