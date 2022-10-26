@@ -1,6 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
-import CourseSummary from '../../CourseSummary/CourseSummary/CourseSummary';
+import { Link, useLoaderData } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -10,7 +9,7 @@ import Row from 'react-bootstrap/Row';
 const Home = () => {
     const allCourse = useLoaderData();
     //const { id, name, duration, description } = course;
-    //console.log(course.name);
+    console.log(allCourse);
     return (
         <div>
             <h2>This is Home Component: {allCourse.length}</h2>
@@ -31,7 +30,7 @@ const Home = () => {
                                     <h4 className='mb-5 text-center'>{item.duration}</h4>
                                     <p className='text-center'>{item.description}</p>
                                 </Card.Text>
-                                <Button style={{ marginLeft:'140px' }} variant="outline-info">Learn More</Button>                                
+                                <Button style={{ marginLeft:'140px' }} variant="outline-info"><Link to={`/course/${item.id}`}>Learn More</Link></Button>                                
                             </Card.Body>
                         </Card>
                     </Col>
