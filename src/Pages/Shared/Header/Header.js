@@ -36,14 +36,12 @@ const Header = () => {
                         <Nav.Link href="#pricing">Blog</Nav.Link>                       
                     </Nav>
                     <Nav>
-                        <Nav.Link href="">Login</Nav.Link>
+                        <Nav.Link href="/login">Login</Nav.Link>
                         
                         <label id="switch" class="switch">
                                 <input type="checkbox" onChange={toggleTheme} id="slider"/>
                                     <span class="slider round"></span>
-                            </label>                      
-
-
+                            </label>                     
                     </Nav>
                 </Navbar.Collapse>
             </Container>
