@@ -7,7 +7,7 @@ const SideNav = () => {
     const [courses, setCourses] = useState([]);
 
     useEffect( ()=>{
-        fetch('http://localhost:5000/courses-categories')
+        fetch('http://localhost:5000/courses')
         .then(res => res.json())
         .then(data => setCourses(data))
     })
@@ -15,10 +15,10 @@ const SideNav = () => {
         <div>
             <h4>Our All Courses: {courses.length}</h4>
             {
-                courses.map(course => <p
+                courses.map(course => <p className='mt-5 '
                   key={course.id}
 
-                ><Link to={`/course/${course.id}`}>{course.name}</Link></p>)
+                ><Link style={{textDecoration: 'none'}} to={`/course/${course.id}`}>{course.name}</Link></p>)
             }
         </div>
     );
