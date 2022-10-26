@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
+
 const UserContext = ({children}) => {
    const [user, setUser] = useState(null);
 
@@ -21,6 +22,7 @@ const UserContext = ({children}) => {
 
    const logOut = () =>{
       return signOut(auth);
+
    }
 
    useEffect( () =>{

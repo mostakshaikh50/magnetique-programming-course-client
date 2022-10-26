@@ -8,12 +8,11 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Context/UserContext';
 import { Button } from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
     const {user, logOut} = useContext(AuthContext);
     
-    const navigate = useNavigate();
 
     function setTheme(themeName) {
         localStorage.setItem('theme', themeName);
@@ -44,8 +43,7 @@ const Header = () => {
                     </Nav>
                     <Nav>{
                            user?.uid ?
-                           <Button style={{marginRight:"10px"}} onClick={logOut}>Log Out</Button>
-                           
+                           <Button style={{marginRight:"10px"}} onClick={logOut}>Log Out</Button>                          
 
                             :
                             <Link style={{textDecoration: 'none',marginRight:"10px", fontWeight:"600"}} to="/login">Login</Link>
