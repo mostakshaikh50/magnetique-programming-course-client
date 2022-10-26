@@ -4,13 +4,14 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import './Register.css'
 import { useState } from 'react';
-
 import { AuthContext } from '../../../../Context/UserContext';
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
 
     const [error, setError] =useState(null);
-    const {createUser} = useContext(AuthContext)
+    const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
 
    const handleSubmit= (event) =>{
         event.preventDefault();
@@ -32,9 +33,9 @@ const Register = () => {
 
         createUser(email, password)
         .then(result => {
-            const user =result.user;
-            console.log(user);
+            const user =result.user;            
             form.reset();
+            navigate("/login");
         })
         .catch(error => console.error(error));
 
@@ -50,11 +51,11 @@ const Register = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control name="email" type="email" placeholder="Enter email" />
+                    <Form.Control name="email" type="email" placeholder="Enter email" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" name="password" placeholder="Password" />
+                    <Form.Control type="password" name="password" placeholder="Password" required/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupPassword">
                     <Form.Label>Confirm Password</Form.Label>

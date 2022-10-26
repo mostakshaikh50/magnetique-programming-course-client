@@ -5,8 +5,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import './Header.css'
 import Image from '../../../assets/logo/logo.png'
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../../Context/UserContext';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const {user, logOut} = useContext(AuthContext);
+    
+    const navigate = useNavigate();
 
     function setTheme(themeName) {
         localStorage.setItem('theme', themeName);
@@ -24,7 +31,7 @@ const Header = () => {
 
 
     return (
-        <Navbar collapseOnSelect className='mb-5' expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect className='mb-5' expand="lg" bg="dark" variant="primary">
             <Container>
                 <Navbar.Brand><img alt="" src={Image} width="30" height="30"
               className="d-inline-block align-top "/><Link to='/' style={{textDecoration: 'none'}}> Magnetique Programming Course</Link></Navbar.Brand>
@@ -35,14 +42,22 @@ const Header = () => {
                         <Nav.Link href="#pricing">FAQ</Nav.Link>
                         <Nav.Link href="#pricing">Blog</Nav.Link>                       
                     </Nav>
-                    <Nav>
-                        <Nav.Link href="/login">Login</Nav.Link>
+                    <Nav>{
+                           user?.uid ?
+                           <Button style={{marginRight:"10px"}} onClick={logOut}>Log Out</Button>
+                           
+
+                            :
+                            <Link style={{textDecoration: 'none',marginRight:"10px", fontWeight:"600"}} to="/login">Login</Link>
+
+                        }
                         
                         <label id="switch" class="switch">
                                 <input type="checkbox" onChange={toggleTheme} id="slider"/>
                                     <span class="slider round"></span>
                             </label>                     
                     </Nav>
+                    <span>{user?.email}</span>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
