@@ -6,9 +6,15 @@ import './Login.css'
 import { useContext } from 'react';
 import { AuthContext } from '../../../../Context/UserContext';
 import { useNavigate } from "react-router-dom";
+import { ButtonGroup } from 'react-bootstrap';
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { GoogleAuthProvider } from 'firebase/auth';
+
 
 const Login = () => {
-    const {signIn} = useContext(AuthContext);
+    const {signIn, googleProviderLogin} = useContext(AuthContext);
+
+    const googleAuthProvider = new GoogleAuthProvider();
     const navigate = useNavigate();
 
     const handleSubmit = (event) =>{
@@ -20,14 +26,22 @@ const Login = () => {
 
             signIn(email, password)
             .then(result =>{
-                const user =result.user;
-                console.log(user);
+                const user =result.user;                
                 form.reset();
                 navigate("/");
             })
             .catch(error => console.error(error));
     }
 
+    const handleGoogleSignIn = () =>{
+        googleProviderLogin(googleAuthProvider)
+        .then(result =>{
+            const user = result.user;
+            console.log(user);
+            navigate("/");
+        })
+        .catch(error => console.error(error));
+    }
 
     return (
         <div className='form-login'>
@@ -43,6 +57,13 @@ const Login = () => {
                 </Form.Group>
                 <Button className='btn-submit' variant="primary" type="submit">Login</Button>
                 <p>New to here ? <Link to="/register">Create New Account</Link></p>
+
+                <div>
+                    <ButtonGroup className='btn-GH' vertical>
+                        <Button onClick={handleGoogleSignIn} className='mb-2 mt-5' variant="outline-primary"><FaGoogle></FaGoogle> Login with Google</Button>
+                        <Button variant="outline-dark"><FaGithub></FaGithub> Login with Github</Button>
+                    </ButtonGroup>
+                </div>
             </Form>
         </div>
     );
