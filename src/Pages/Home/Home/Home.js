@@ -22,7 +22,7 @@ const Home = () => {
                     <Col lg-8>
                         {allCourse.length && allCourse.map((item, idx) => (
 
-                            <Card key={idx} style={{ height: "300px" }}>
+                            <Card key={idx} style={{ height: "300px", marginBottom:'10px' }}>
                                 <Card.Body className='mt-3'>
                                     <Card.Title><h3 className='h2 text-center mb-3'>{item.name}</h3></Card.Title>
                                     <Card.Text>
