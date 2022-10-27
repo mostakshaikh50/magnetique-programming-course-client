@@ -40,8 +40,8 @@ const Header = () => {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link><Link to='/' style={{textDecoration: 'none'}}>Courses</Link></Nav.Link>
-                        <Nav.Link href="#pricing">FAQ</Nav.Link>
-                        <Nav.Link href="#pricing">Blog</Nav.Link>
+                        
+                        <Nav.Link><Link style={{textDecoration: 'none'}} to='/blog'>Blog</Link></Nav.Link>
                                       
                     </Nav>
                     <Nav>{
