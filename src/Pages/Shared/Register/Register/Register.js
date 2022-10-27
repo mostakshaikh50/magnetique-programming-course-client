@@ -9,14 +9,15 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
 
-    const [error, setError] =useState(null);
-    const {createUser} = useContext(AuthContext);
+    const [error, setError] =useState('');
+    const {createUser, updateUserProfile} = useContext(AuthContext);
     const navigate = useNavigate();
 
    const handleSubmit= (event) =>{
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
         const confirm = form.confirm.value;
@@ -35,10 +36,25 @@ const Register = () => {
         .then(result => {
             const user =result.user;            
             form.reset();
+            setError('');
+            handleUpdateUserProfile(name, photoURL)
             navigate("/login");
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            console.error(error)
+            setError(error.message)
+        });
 
+   }
+
+   const handleUpdateUserProfile = (name, photoURL) =>{
+      const profile = {
+            displayName: name,
+            photoURL: photoURL
+      }
+      updateUserProfile(profile)
+      .then(() =>{})
+      .catch(error => console.error(error))
    }
 
     return (
@@ -48,6 +64,10 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label>Name</Form.Label>
                     <Form.Control name="name" type="name" placeholder="Enter name" />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                    <Form.Label>PhotoURL</Form.Label>
+                    <Form.Control name="photoURL" type="Photo" placeholder="Photo URL" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label>Email</Form.Label>
@@ -60,10 +80,13 @@ const Register = () => {
                 <Form.Group className="mb-3" controlId="formGroupPassword">
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control type="password" name="confirm" placeholder="Password" />
+                    <Form.Text className='text-danger'>
+                        {error}
+                    </Form.Text>
                 </Form.Group>
                 <Button className='btn-register' variant="primary" type="submit">Sign Up</Button>
                 <p>Are you already registered? <Link to="/login">Login</Link></p>
-                 <p className='text-danger'>{error}</p>
+                 
             </Form>
         </div>
     );

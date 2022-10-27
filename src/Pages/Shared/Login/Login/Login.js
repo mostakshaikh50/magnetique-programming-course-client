@@ -9,38 +9,44 @@ import { useNavigate } from "react-router-dom";
 import { ButtonGroup } from 'react-bootstrap';
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider } from 'firebase/auth';
+import { useState } from 'react';
 
 
 const Login = () => {
-    const {signIn, googleProviderLogin} = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const { signIn, googleProviderLogin } = useContext(AuthContext);
 
     const googleAuthProvider = new GoogleAuthProvider();
     const navigate = useNavigate();
 
-    const handleSubmit = (event) =>{
-            event.preventDefault();
-            const form = event.target;
-            const email = form.email.value;
-            const password = form.password.value;
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
 
 
-            signIn(email, password)
-            .then(result =>{
-                const user =result.user;                
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
                 form.reset();
+                setError('');
+                navigate("/");
+            })
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            });
+    }
+
+    const handleGoogleSignIn = () => {
+        googleProviderLogin(googleAuthProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
                 navigate("/");
             })
             .catch(error => console.error(error));
-    }
-
-    const handleGoogleSignIn = () =>{
-        googleProviderLogin(googleAuthProvider)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-            navigate("/");
-        })
-        .catch(error => console.error(error));
     }
 
     return (
@@ -54,8 +60,13 @@ const Login = () => {
                 <Form.Group className="mb-3" controlId="formGroupPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" placeholder="Password" />
+                    <Form.Text className='text-danger'>
+                        {error}
+                    </Form.Text>
                 </Form.Group>
+
                 <Button className='btn-submit' variant="primary" type="submit">Login</Button>
+
                 <p>New to here ? <Link to="/register">Create New Account</Link></p>
 
                 <div>
