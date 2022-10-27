@@ -1,20 +1,22 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
+import './Course.css'
 
 const Course = () => {
     const courseCategory = useLoaderData();
     const coursesItem = courseCategory.languages.name;
     const courseItem = coursesItem.split('_');
-    console.log(courseItem)
+    console.log(courseCategory._id)
     return (
-        <div>
-            <Card style={{ height: "500px", width: "900px" }} className="mb-5">
+        <div className='card-details'>
+            <Card style={{ height: "900px", width: "900px" }} className="mb-5">
                 <Card.Body>
                     <Card.Title><h3 style={{ color: "green", fontWeight: "700" }} className='text-center'>{courseCategory.title}</h3></Card.Title>
                     <Card.Text>
-                        <ListGroup style={{ width: "300px" }} className='text-center mt-3 mx-5'>
+                        <ListGroup style={{ height:'200px', width: "300px" }} className='text-center mt-3 mx-5'>
                             <ListGroup.Item>Course Item-1:<span style={{ color: 'blue', fontSize: "20px", fontFamily: "700" }}> {courseItem[0]}</span></ListGroup.Item>
                             <ListGroup.Item>Course Item-2:<span style={{ color: 'blue', fontSize: "20px" }}> {courseItem[1]}</span></ListGroup.Item>
                             <ListGroup.Item>Course Item-3:<span style={{ color: 'blue', fontSize: "20px" }}> {courseItem[2]}</span></ListGroup.Item>
@@ -25,6 +27,9 @@ const Course = () => {
                     </Card.Text>
                     <Card.Img style={{ height: "300px" }} variant="top" src={courseCategory.image_url} />
                     <p className=''>{courseCategory.details}</p>
+                    <Button className='btn-premium' variant='outline-info'><Link
+                    details = {courseCategory}
+                    style={{textDecoration: 'none'}} to={`/checkout/${courseCategory._id}`}>Get premium access</Link></Button>
                 </Card.Body>
             </Card>
         </div>

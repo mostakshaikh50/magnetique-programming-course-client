@@ -29,7 +29,7 @@ const Home = () => {
                                         <h4 className='mb-5 text-center'>{item.duration}</h4>
                                         <p className='text-center'>{item.description}</p>
                                     </Card.Text>
-                                    <Button style={{ marginLeft: '140px' }} variant="outline-info"><Link to={`/course/${item.id}`}>Learn More</Link></Button>
+                                    <Button style={{ marginLeft: '140px' }} variant="outline-info"><Link style={{textDecoration: 'none'}} to={`/course/${item.id}`}>Learn More</Link></Button>
                                 </Card.Body>
                             </Card>
                         ))}
