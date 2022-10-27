@@ -5,6 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Link, useLoaderData } from 'react-router-dom';
 import './Course.css';
 import Pdf from "react-to-pdf";
+import { FaAlignRight } from 'react-icons/fa';
 
 const ref = React.createRef();
 const Course = () => {
@@ -17,7 +18,7 @@ const Course = () => {
             
             <Card style={{ height: "900px", width: "900px", marginBottom:'10px' }} className="mb-5">
             <Pdf targetRef={ref} filename="code-example.pdf">
-                    {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                    {({ toPdf }) => <Button variant='info' style={{ width: "300px", height: "60px", marginTop:"5px", marginLeft:"10px"}}  onClick={toPdf}>DOWNLOAD PDF</Button>}
                 </Pdf>
                 <Card.Body>
                     <Card.Title><h3 style={{ color: "green", fontWeight: "700" }} className='text-center'>{courseCategory.title}</h3></Card.Title>

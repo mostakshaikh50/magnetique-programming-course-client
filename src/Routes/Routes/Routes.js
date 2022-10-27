@@ -5,6 +5,7 @@ import CheckOut from "../../Pages/CheckOut/CheckOut/CheckOut";
 import Course from "../../Pages/Course/Course/Course";
 import CourseDetails from "../../Pages/CourseDetails/CourseDetails/CourseDetails";
 import Home from "../../Pages/Home/Home/Home";
+import FAQ from "../../Pages/Shared/FAQ/FAQ/FAQ";
 import Login from "../../Pages/Shared/Login/Login/Login";
 import Register from "../../Pages/Shared/Register/Register/Register";
 import PrivateRoute from "./PrivateRoute";
@@ -40,6 +41,10 @@ export const routes = createBrowserRouter([
          {
             path:'/blog',
             element: <Blog></Blog>
+         },
+         {
+            path:'/faq',
+            element: <FAQ></FAQ>
          },
          {
             path: '/checkout/:id',
